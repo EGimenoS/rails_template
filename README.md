@@ -8,10 +8,15 @@ Para iniciar app con postgres como db:
 Funcionalidad añadida:
 
 Bootstrap
+
 Font-Awesome
+
 local_time
+
 data_confirm_modal
+
 better_errors
+
 rubocop
 
 Modificado database.yml para que funcione en Vagrant.
