@@ -1,9 +1,18 @@
+def source_paths
+  [File.expand_path(File.dirname(__FILE__))]
+end
+
 def add_gems
   gem 'bootstrap', '~> 4.1', '>= 4.1.1'
   gem 'font-awesome-sass', '~> 5.5', '>= 5.5.0.1'  
   gem 'jquery-rails', '~> 4.3.1'
   gem 'local_time', '~> 2.0', '>= 2.0.1'
   gem 'data-confirm-modal', '~> 1.6', '>= 1.6.2'
+  gem_group :development, :test do
+    gem "better_errors"
+    gem "binding_of_caller"
+    gem 'rubocop', require: false
+  end
 end
 
 def set_db
@@ -34,14 +43,6 @@ def set_db
   end
 end
 
-def add_dev_gems
-  gem_group :development, :test do
-    gem "better_errors"
-    gem "binding_of_caller"
-    gem 'rubocop', require: false
-  end
-end
-
 def set_application_name
   # Add Application Name to Config
   environment "config.application_name = Rails.application.class.parent_name"
@@ -59,8 +60,6 @@ def add_bootstrap
     "\n@import 'bootstrap';",
     after: "*/"
   )
-  
-
   # Add Bootstrap JS
   insert_into_file(
     "app/assets/javascripts/application.js",
@@ -69,21 +68,25 @@ def add_bootstrap
   )
 end
 
+def copy_initializers
+  directory "config/initializers", force: true
+end
 
 def stop_spring
   run "spring stop"
 end
 
 # Main setup
-
+source_paths
 add_gems
-add_dev_gems
 set_db
+
 
 after_bundle do
   set_application_name
   stop_spring
   add_bootstrap
+  copy_initializers
 
   # Migrate
   rails_command "db:create"
