@@ -1,3 +1,4 @@
 <h1>Bienvenido a <%= Rails.configuration.application_name %>!</h1>
 
-<%=User.all%>
+<%=User.all%> 
+<%= local_relative_time(Date.today, 'weekday') %>
