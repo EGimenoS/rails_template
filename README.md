@@ -1,25 +1,33 @@
-# rails_template
-Template básico para apps en Rails, añadiendo de inicio algunas gemas que uso prácticamente siempre.
+### rails_template
+
+Template básico para generar apps en Rails con configuración extra de inicio, añadiendo algunas gemas que uso prácticamente siempre. Está adaptado al desarrollo en local usando Vagrant.
+
+Clonar directorio en carpeta /template/
 
 Para iniciar app con postgres como db:
 
-`rails new myapp -d postgresql -m template.rb`
+`rails new myapp -d postgresql -m template/template.rb`
 
 Funcionalidad añadida:
 
-Bootstrap
+* bootstrap 4.1
 
-Font-Awesome
+* Font-Awesome
 
-local_time
+* local_time
 
-data_confirm_modal
+* data_confirm_modal
 
-better_errors
+* better_errors
 
-rubocop
+* rubocop
 
-Modificado database.yml para que funcione en Vagrant.
+* devise (incluyendo traducciones al castellano para las vistas, en construcción)
+
+* configuración para db en local.
+
+
+
 
 
 
