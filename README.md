@@ -1,6 +1,7 @@
 ### rails_template
 
 Template básico para generar apps en Rails con configuración extra de inicio, añadiendo algunas gemas que uso prácticamente siempre. Está adaptado al desarrollo en local usando Vagrant.
+Basado en: [jumpstart, de Chris Oliver](https://github.com/excid3/jumpstart)
 
 Clonar directorio en carpeta /template/
 
@@ -14,7 +15,7 @@ Funcionalidad añadida:
 
 * Font-Awesome
 
-* local_time
+* local_time (con traducción al castellano)
 
 * data_confirm_modal
 
