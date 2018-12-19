@@ -8,6 +8,7 @@ def add_gems
   gem 'jquery-rails', '~> 4.3.1'
   gem 'local_time', '~> 2.0', '>= 2.0.1'
   gem 'data-confirm-modal', '~> 1.6', '>= 1.6.2'
+  gem 'devise', '~> 4.4', '>= 4.4.3'
   gem_group :development, :test do
     gem "better_errors"
     gem "binding_of_caller"
@@ -51,6 +52,20 @@ def set_application_name
   puts "You can change application name inside: ./config/application.rb"
 end
 
+def add_users
+  # Install Devise
+  generate "devise:install"
+
+  # Configure Devise
+  environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3030 }",
+              env: 'development'
+
+  route "root to: 'home#index'"
+
+  # Create Devise User
+  generate :devise, "User"
+
+end
 
 def add_bootstrap
   # Remove Application CSS 
@@ -68,8 +83,14 @@ def add_bootstrap
   )
 end
 
-def copy_initializers
+def set_config
   directory "config/initializers", force: true
+   environment "config.web_console.whitelisted_ips = '10.0.2.2'", #needed for web_console when developing in vagrant
+              env: 'development'
+end
+
+def copy_templates
+  directory "app", force: true
 end
 
 def stop_spring
@@ -86,7 +107,9 @@ after_bundle do
   set_application_name
   stop_spring
   add_bootstrap
-  copy_initializers
+  add_users
+  set_config
+  copy_templates
 
   # Migrate
   rails_command "db:create"
